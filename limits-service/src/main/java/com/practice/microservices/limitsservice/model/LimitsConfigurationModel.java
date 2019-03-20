@@ -1,5 +1,7 @@
 package com.practice.microservices.limitsservice.model;
 
+import java.util.Objects;
+
 public class LimitsConfigurationModel {
 
 	private int min;
@@ -27,5 +29,27 @@ public class LimitsConfigurationModel {
 
 	public void setMax(int max) {
 		this.max = max;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		LimitsConfigurationModel that = (LimitsConfigurationModel) o;
+		return min == that.min &&
+				max == that.max;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(min, max);
+	}
+
+	@Override
+	public String toString() {
+		return "LimitsConfigurationModel{" +
+				"min=" + min +
+				", max=" + max +
+				'}';
 	}
 }
