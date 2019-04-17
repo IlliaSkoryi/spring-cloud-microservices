@@ -3,6 +3,7 @@ package com.practice.microservices.currencyexchangeservice.controller.impl;
 import com.practice.microservices.currencyexchangeservice.controller.CurrencyExchangeController;
 import com.practice.microservices.currencyexchangeservice.model.ExchangeValue;
 import com.practice.microservices.currencyexchangeservice.service.ExchangeValueService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 
+@Slf4j
 @RestController
 public class CurrencyExchangeControllerImpl implements CurrencyExchangeController {
 
@@ -25,6 +27,7 @@ public class CurrencyExchangeControllerImpl implements CurrencyExchangeControlle
 	public ExchangeValue retrieveExchangeValue(@PathVariable String from, @PathVariable String to) {
 		ExchangeValue exchangeValue = service.findByFromAndTo(from, to);
 		exchangeValue.setPort(environment.getProperty("local.server.port"));
+		log.info("{}", exchangeValue);
 		return exchangeValue;
 	}
 }
